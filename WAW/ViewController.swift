@@ -265,6 +265,19 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         self.setView(view: Views.Chat)
         return true
     }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated  {
+            if let url = navigationAction.request.url,
+                UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+                decisionHandler(.cancel)
+                
+            }
+        } else {
+            decisionHandler(.allow)
+        }
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         observer?.invalidate()
