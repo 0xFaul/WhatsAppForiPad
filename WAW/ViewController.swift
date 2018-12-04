@@ -75,14 +75,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     
     let js_addBackButton = """
             if (document.getElementById('backbutton') == null) {
-                document.getElementsByClassName('_3AwwN')[0].innerHTML = '<div id="backbutton" role="button" style="margin-right: 10px;"><span data-icon="back-blue" class=""><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20v-2z"></path></svg></span></div>' + document.getElementsByClassName('_3AwwN')[0].innerHTML.toString();
+                var backbtn = document.createElement('div');
+                backbtn.setAttribute('id', 'backbutton');
+                backbtn.style.marginRight = "10px";
+                backbtn.innerHTML = '<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20v-2z"></path></svg></span>';
+                var header = document.getElementsByClassName('_3AwwN')[0];
+                header.insertBefore(backbtn, header.childNodes[0]);
                 document.getElementById('backbutton').style.display = 'none';
                 document.getElementById('backbutton').addEventListener('click', function() {webkit.messageHandlers.back.postMessage("back");});
             }
-            """
-    
-    let html_DefaultChatView = """
-            <div class="_3q4NP _1Iexl"><div class="_3qlW9"><div class="_3BqNZ"><div data-asset-intro-image="true" class="_2Uo0Z" style="transform: scale(1); opacity: 1;"></div><div class="_2MnNk" style="opacity: 1; transform: translateY(0px);"><h1 class="iHhHL">Dein Telefon braucht eine aktive Internetverbindung.</h1><div class="_1ClcF">WhatsApp verbindet sich mit deinem Telefon, um Nachrichten zu synchronisieren. Verbinde dein Telefon mit einem WLAN, um den Datenverbrauch zu reduzieren.</div></div></div></div></div>
             """
     
     func setTrigger(){
@@ -99,6 +100,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
                 document.getElementsByClassName('_3q4NP k1feT') [1].style.flex = "0 0 100%";  // side view ( List of chats)
                 document.getElementsByClassName('_1Iexl')[0].style.flex = "0 0 0%";           // search etc.
                 document.getElementsByClassName('_3q4NP _1Iexl')[1].style.flex = "0 0 0%";    // chat view
+
                 document.getElementById('backbutton').style.display = "none";
                 """, completionHandler: nil)
                 break;
@@ -108,6 +110,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
                 document.getElementsByClassName('_3q4NP k1feT') [1].style.flex = "0 0 0%";
                 document.getElementsByClassName('_1Iexl')[0].style.flex = "0 0 100%";
                 document.getElementsByClassName('_3q4NP _1Iexl')[1].style.flex = "0 0 100%";
+
+                document.getElementsByClassName('_3q4NP _2yeJ5')[0].style.width = "100%";
+                document.getElementsByClassName('_3q4NP _2yeJ5')[0].style.flex = "0 0 100%";
+                document.getElementsByClassName('_3q4NP _2yeJ5')[0].style.left = "0";
+
                 document.getElementById('backbutton').style.display = "block";
                 """, completionHandler: nil)
                 setTrigger()
@@ -118,6 +125,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
                 document.getElementsByClassName('_3q4NP k1feT') [1].style.flex = "0 0 35%";
                 document.getElementsByClassName('_1Iexl')[0].style.flex = "0 0 65%";
                 document.getElementsByClassName('_3q4NP _1Iexl')[1].style.flex = "0 0 65%";
+
+                document.getElementsByClassName('_3q4NP _2yeJ5')[0].style.width = "65%";
+                document.getElementsByClassName('_3q4NP _2yeJ5')[0].style.flex = "0 0 65%";
+                document.getElementsByClassName('_3q4NP _2yeJ5')[0].style.left = "35%";
+
                 document.getElementById('backbutton').style.display = "none";
                 """, completionHandler: nil)
                 setTrigger()
@@ -188,8 +200,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         wkView.allowsBackForwardNavigationGestures = false
         wkView.scrollView.isScrollEnabled = true
         wkView.scrollView.bounces = false
-        wkView.scrollView.showsHorizontalScrollIndicator = false
-        wkView.scrollView.showsVerticalScrollIndicator = false
         
         wkView.scrollView.delegate = self
         
@@ -262,10 +272,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-        self.setView(view: Views.Chat)
+        if( self.view.bounds.width < 650.0) {
+            self.setView(view: Views.Chat)
+        }
         return true
     }
-
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated  {
             if let url = navigationAction.request.url,

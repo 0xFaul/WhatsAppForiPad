@@ -14,6 +14,7 @@
 		843F3A3921B35153005D876F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843F3A3721B35153005D876F /* LaunchScreen.storyboard */; };
 		843F3A4421B35153005D876F /* WAWTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F3A4321B35153005D876F /* WAWTests.swift */; };
 		843F3A4F21B35153005D876F /* WAWUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F3A4E21B35153005D876F /* WAWUITests.swift */; };
+		84F8910421B6DC97003EC451 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 84F8910321B6DC97003EC451 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		843F3A4A21B35153005D876F /* WAWUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WAWUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		843F3A4E21B35153005D876F /* WAWUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAWUITests.swift; sourceTree = "<group>"; };
 		843F3A5021B35153005D876F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84F8910321B6DC97003EC451 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		843F3A2D21B35151005D876F /* WAW */ = {
 			isa = PBXGroup;
 			children = (
+				84F8910321B6DC97003EC451 /* README.md */,
 				843F3A2E21B35151005D876F /* AppDelegate.swift */,
 				843F3A3021B35151005D876F /* ViewController.swift */,
 				843F3A3221B35151005D876F /* Main.storyboard */,
@@ -234,6 +237,7 @@
 			files = (
 				843F3A3921B35153005D876F /* LaunchScreen.storyboard in Resources */,
 				843F3A3621B35153005D876F /* Assets.xcassets in Resources */,
+				84F8910421B6DC97003EC451 /* README.md in Resources */,
 				843F3A3421B35151005D876F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,7 +23,6 @@ WhatsApp Web Client for iPad - optimized for Slide Over, Split View and Drag'n'D
 
 ## Known issues
 * a "click" requires two taps
-* chat header buttons (search, attach, ...) are not working
 * Website modification in Javascript far from perfect
 * status view not optimized
 * voice messages not supported yet
