@@ -4,7 +4,7 @@
 WhatsApp Web Client for iPad - optimized for Slide Over, Split View and Drag'n'Drop
 
 
-**Work in Progress!**
+~**Work in Progress!**~ Discontinued since i got rid of my Mac
 
 ## Features
 * Optimized for use in Split View and Slide Over
